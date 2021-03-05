@@ -5,10 +5,13 @@
 #include <stdint.h>
 #include <string.h>
 #include "murmur3.h"
+#include <sstream>
+using namespace std;
+
 
 int main(int argc, char **argv) {
   uint32_t hash[4];                /* Output for the hash */
-  uint32_t seed = 42;              /* Seed value for hash */
+  uint32_t seed = 0;              /* Seed value for hash */
 
   if (argc != 2) {
     printf("usage: %s \"string to hash\"\n", argv[0]);
@@ -19,6 +22,14 @@ int main(int argc, char **argv) {
   
   MurmurHash3_x86_32(argv[1], strlen(argv[1]), seed, hash);
   printf("x86_32:  %08x\n", hash[0]);
+
+
+    int x;
+    stringstream ss;
+    ss << std::hex << hash[0];  //std::oct（八进制）、std::dec（十进制）
+    ss >> x;
+    printf("x86_32:  %08x\n", x);
+
 
   MurmurHash3_x86_128(argv[1], strlen(argv[1]), seed, hash);
   printf("x86_128: %08x %08x %08x %08x\n",

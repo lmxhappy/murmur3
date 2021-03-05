@@ -8,8 +8,8 @@ tests: test.o murmur3.o
 	$(CC) $^ -o $@
 	./tests
 
-shared: murmur3.c murmur3.h
-	$(CC) -fPIC -O3 -c murmur3.c
+shared: murmur3.cc murmur3.h
+	$(CC) -fPIC -O3 -c murmur3.cc
 	$(CC) -shared -Wl,--export-dynamic murmur3.o -o libmurmur3.so
 
 clean:
